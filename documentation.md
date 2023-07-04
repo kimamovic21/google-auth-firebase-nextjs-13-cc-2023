@@ -1,0 +1,66 @@
+NextJS Authentication Firebase - Sign in with Google
+
+-npx create-next app (ime aplikacije)
+-brisemo nepotrebne stvari u page.js fajlu
+-kreiramo folder about i unutar njega page.jsx komponentu
+-kreiramo folder profile i unutar njega page.jsx komponentu
+-kreiramo components folder i unutar njega Navbar.jsx komponentu
+-u layout.js fajl importujemo Navbar komponentu
+-u Navbar.jsx komponentu importujemo Link komponentu
+-kreiramo ul element i unutar njega li elemente
+-unutar li elemenata dodajemo Link komponentu
+-u app folderu kreiramo context folder i unutar njega AuthContext.jsx komponentu
+-u AuthContext.jsx komponentu kreiramo AuthContext varijablu
+-kreiramo AuthContextProvider sa parametrom {children}
+-kreiramo UserAuth funkciju
+-u layout.js fajl importujemo AuthContextProvider
+-u body elementu dodajemo AuthContextProvider komponentu
+-u AuthContext.jsx komponenti kreiramo const [user, setUser] = useState('Kerim')
+-u return izjavi, AuthContextProvider komponenti dodajemo value={{user}}
+-u Navbar.jsx komponentu importujemo UserAuth
+-u Navbar.jsx komponenti kreiramo const { user } = UserAuth()
+-kreiramo Firebase projekt
+-odaberemo web opciju da registrujemo aplikaciju
+-u terminalu instaliramo npm install firebase
+-u app folderu kreiramo firebase.js fajl
+-kopiramo kod sa Firebase u firebase.js fajl
+-na Firebase odaberemo build - authentication opciju
+-odaberemo google opciju i kliknemo enable
+-dodamo svoj email i kliknemo save
+-u firebase.js fajl importujemo getAuth funkciju
+-u firebase.js fajlu kreiramo export const auth = getAuth(app)
+-u AuthContext.jsx komponentu importujemo funkcije sa Firebase
+-u AuthContext.jsx komponentu importujemo auth
+-kreiramo googleSignIn funkciju
+-u googleSignIn funkciji kreiramo provider varijablu
+-u googleSignIn funkciji pozivamo signInWithPop funkciju sa dva argumenta auth i provider
+-kreiramo googleLogOut funkciju
+-u googleLogOut funkciji pozivamo signOut funkciju sa argumentom auth
+-kreiramo useEffect() React hook
+-unutar useEffect() callback funkcije kreiramo unsubscribe varijablu
+-pozivamo setUser funkciju sa argumentom currentUser
+-u value prop proslijedujemo vrijednost googleSignIn i googleSignOut funkcija
+-u Navbar.jsx komponenti dodajemo const { user, googleSignIn, googleSignOut } = UserAuth()
+-kreiramo asinhroni funkciju handleSignIn sa try - catch blokovima koda
+-u try bloku koda dodajemo await googleSignIn() funkciju
+-li Login elementu dodajemo onClick dogadaj i proslijedujemo mu vrijednost handleSignIn funkcije
+-kreiramo asinhronu funkciju handleSignOut sa try - catch blokovima koda
+-u try bloku koda dodajemo await googleSignOut() funkciju
+-li Signup elementu proslijedujemo vrijednost handleSignIn funkcije
+-u Navbar.jsx komponenti dodajemo uslov ako korisnik ne postoji {!user ? ... : ...}
+-div elementu dodajemo dva p elementa
+-drugom p elementu dodajemo onClick dogadaj i proslijedujemo mu vrijednost handleSignOut funkcije
+-u Navbar.jsx komponenti kreiramo const [loading, setLoading] = useState(true)
+-kreiramo useEffect() React hook
+-u useEffect(), unutar callback funkcije, kreiramo checkAuthentication funkciju
+-u profile folderu, u page.jsx komponentu importujemo UserAuth
+-kreiramo const {user} = UserAuth()
+-kreiramo useEffect() React hook
+-kreiramo const [loading, setLoading] = useState(true)
+-u return izjavi dodajemo {user ? ... : ...}
+-u components dodajemo folderu kreiramo Spinner.jsx komponentu
+-u Spinner.jsx komponentu importujemo Image komponentu
+-u Spinner.jsx komponenti, Image kompnenti dodajemo src i alt atribute
+-u profile folderu, u page.jsx komponentu importujemo Spinner komponentu
+-dodajemo uslov za pojavljivanje Link Profile
+-
